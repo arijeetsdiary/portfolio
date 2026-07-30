@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Arijeet Roy — Civil Design Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+<style>
+/* ===== SHARED CSS — Light & Precision palette ===== */
+:root{
+  --bg-1:#F7F8FA;
+  --bg-2:#EAECF0;
+  --bg-3:#F0F2F5;
+  --bg-card:#FFFFFF;
+  --accent-blue:#1E50A0;
+  --accent-teal:#00A3CC;
+  --accent-teal-dim:rgba(0,163,204,0.10);
+  --accent-blue-dim:rgba(30,80,160,0.08);
+  --text-1:#0F1923;
+  --text-2:#3D4F63;
+  --text-3:#6B7A8D;
+  --border:rgba(30,80,160,0.13);
+  --border-bright:rgba(0,163,204,0.45);
+  --radius:8px;
+  --font:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+  --font-m:'SF Mono','Fira Code','JetBrains Mono',monospace;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg-1);color:var(--text-1);font-family:var(--font);font-size:16px;line-height:1.65;overflow-x:hidden}
+::-webkit-scrollbar{width:5px}::-webkit-scrollbar-track{background:var(--bg-1)}::-webkit-scrollbar-thumb{background:var(--accent-blue);border-radius:3px}
+::selection{background:rgba(30,80,160,0.15);color:var(--text-1)}
+nav{position:fixed;top:0;left:0;right:0;z-index:999;padding:1.2rem 3.5rem;display:flex;align-items:center;justify-content:space-between;transition:all 0.35s ease;background:transparent}
+nav.scrolled{background:rgba(247,248,250,0.94);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--border);padding:0.85rem 3.5rem}
+.nav-logo{font-family:var(--font);font-size:1.3rem;font-weight:700;color:var(--text-1);text-decoration:none;letter-spacing:-0.01em}
+.nav-logo span{color:var(--accent-blue)}
+.nav-links{list-style:none;display:flex;gap:2.2rem}
+.nav-links a{color:var(--text-2);text-decoration:none;font-family:var(--font-m);font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;transition:color 0.2s;position:relative}
+.nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:1.5px;background:var(--accent-blue);transition:width 0.3s ease}
+.nav-links a:hover,.nav-links a.active{color:var(--accent-blue)}
+.nav-links a:hover::after,.nav-links a.active::after{width:100%}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:3px}
+.hamburger span{width:22px;height:1.5px;background:var(--text-1);transition:all 0.3s ease;display:block}
+.hamburger.open span:nth-child(1){transform:rotate(45deg) translate(4.5px,4.5px)}
+.hamburger.open span:nth-child(2){opacity:0}
+.hamburger.open span:nth-child(3){transform:rotate(-45deg) translate(4.5px,-4.5px)}
+.mob-overlay{display:none;position:fixed;inset:0;background:rgba(247,248,250,0.98);z-index:998;flex-direction:column;align-items:center;justify-content:center;gap:2rem}
+.mob-overlay.open{display:flex}
+.mob-overlay a{font-size:2rem;font-weight:700;color:var(--text-2);text-decoration:none;letter-spacing:-0.01em;transition:color 0.2s}
+.mob-overlay a:hover{color:var(--accent-blue)}
+.page-hero{padding:9rem 0 4.5rem;background:var(--bg-1);position:relative;overflow:hidden}
+.page-hero::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(30,80,160,0.05) 1px,transparent 1px),linear-gradient(90deg,rgba(30,80,160,0.05) 1px,transparent 1px);background-size:56px 56px}
+.page-hero-inner{position:relative;z-index:2;max-width:1200px;margin:0 auto;padding:0 3.5rem}
+.page-eyebrow{font-family:var(--font-m);font-size:0.7rem;letter-spacing:0.22em;color:var(--accent-blue);text-transform:uppercase;margin-bottom:0.9rem}
+.page-title{font-size:clamp(2.6rem,5.5vw,4.5rem);font-weight:700;letter-spacing:-0.02em;line-height:1.05;color:var(--text-1);margin-bottom:0.9rem}
+.page-title em{color:var(--accent-blue);font-style:normal}
+.page-rule{width:44px;height:2px;background:linear-gradient(90deg,var(--accent-blue),var(--accent-teal));margin-bottom:1rem}
+.page-subtitle{font-size:1rem;color:var(--text-2);font-weight:400}
+section{padding:6rem 0}
+.container{max-width:1200px;margin:0 auto;padding:0 3.5rem}
+.sec-label{font-family:var(--font-m);font-size:0.68rem;letter-spacing:0.22em;color:var(--accent-blue);text-transform:uppercase;display:flex;align-items:center;gap:0.7rem;margin-bottom:0.7rem}
+.sec-label::before{content:'';width:24px;height:1.5px;background:var(--accent-blue)}
+.sec-title{font-size:clamp(1.8rem,3vw,2.6rem);font-weight:700;color:var(--text-1);letter-spacing:-0.02em;line-height:1.1;margin-bottom:2.5rem}
+.sec-title em{color:var(--accent-blue);font-style:normal}
+.reveal{opacity:0;transform:translateY(28px);transition:opacity 0.7s ease,transform 0.7s ease}
+.reveal.in{opacity:1;transform:none}
+.reveal-left{opacity:0;transform:translateX(-32px);transition:opacity 0.7s ease,transform 0.7s ease}
+.reveal-left.in{opacity:1;transform:none}
+.reveal-right{opacity:0;transform:translateX(32px);transition:opacity 0.7s ease,transform 0.7s ease}
+.reveal-right.in{opacity:1;transform:none}
+footer{background:var(--text-1);padding:2.5rem 2rem;text-align:center;border-top:1px solid rgba(255,255,255,0.08)}
+.foot-icons{display:flex;gap:1rem;justify-content:center;margin-bottom:1.2rem}
+.foot-icons a{width:36px;height:36px;border:1px solid rgba(255,255,255,0.15);display:flex;align-items:center;justify-content:center;border-radius:var(--radius);font-size:0.9rem;text-decoration:none;transition:all 0.22s}
+.foot-icons a:hover{border-color:var(--accent-teal);background:rgba(0,163,204,0.15)}
+.foot-copy{font-family:var(--font-m);font-size:0.68rem;color:rgba(255,255,255,0.4);letter-spacing:0.08em;margin-bottom:0.35rem}
+.foot-tag{font-size:0.82rem;color:rgba(255,255,255,0.3);font-style:italic}
+@media(max-width:768px){nav{padding:1rem 1.4rem}nav.scrolled{padding:0.7rem 1.4rem}.nav-links{display:none}.hamburger{display:flex}.container{padding:0 1.4rem}section{padding:4rem 0}.page-hero-inner{padding:0 1.4rem}}
+#home{min-height:100vh;display:flex;align-items:center;position:relative;overflow:hidden;background:var(--bg-1)}
+.hero-bg-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(30,80,160,0.06) 1px,transparent 1px),linear-gradient(90deg,rgba(30,80,160,0.06) 1px,transparent 1px);background-size:56px 56px;pointer-events:none}
+.hero-bg-dots{position:absolute;inset:0;background-image:radial-gradient(rgba(0,163,204,0.12) 1px,transparent 1px);background-size:28px 28px;pointer-events:none}
+#hero-particles{position:absolute;inset:0;pointer-events:none}
+.hero-bridge-wrap{position:absolute;bottom:0;left:0;right:0;height:46%;pointer-events:none;display:flex;align-items:flex-end;justify-content:center}
+#hero-bridge{width:90%;max-width:1100px;height:auto;opacity:0.55}
+.hero-inner{position:relative;z-index:10;width:100%;max-width:1280px;margin:0 auto;padding:0 3.5rem;display:grid;grid-template-columns:1fr 180px;align-items:center;gap:2rem}
+.hero-left{padding-top:2rem;padding-bottom:26vh}
+.hero-eyebrow{font-family:var(--font-m);font-size:0.7rem;letter-spacing:0.22em;color:var(--accent-blue);text-transform:uppercase;margin-bottom:0.9rem;opacity:0}
+.hero-name{font-size:clamp(3.2rem,8vw,6.5rem);font-weight:700;line-height:0.95;letter-spacing:-0.02em;color:var(--text-1);opacity:0;margin-bottom:1rem}
+.hero-name span{color:var(--accent-blue);display:block}
+.hero-sub{font-family:var(--font-m);font-size:0.8rem;letter-spacing:0.14em;color:var(--text-2);margin-bottom:0.35rem;opacity:0;text-transform:uppercase}
+.hero-grad{font-family:var(--font-m);font-size:0.72rem;letter-spacing:0.1em;color:var(--accent-teal);opacity:0;margin-bottom:0.8rem}
+.hero-rule{width:44px;height:2px;background:linear-gradient(90deg,var(--accent-blue),var(--accent-teal));margin-bottom:1rem;opacity:0;transform-origin:left}
+.hero-tagline{font-size:1rem;color:var(--text-2);font-style:italic;font-weight:400;opacity:0}
+.hero-right{display:flex;flex-direction:column;gap:1rem;align-items:flex-end;padding-top:1rem;padding-bottom:26vh}
+.hero-sidebar-link{font-family:var(--font-m);font-size:0.66rem;letter-spacing:0.16em;text-transform:uppercase;color:var(--text-3);text-decoration:none;transition:color 0.2s;opacity:0;text-align:right}
+.hero-sidebar-link:hover{color:var(--accent-blue)}
+.scroll-ind{position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:5px;opacity:0;animation:sb 2.2s ease-in-out infinite}
+.scroll-ind span{font-family:var(--font-m);font-size:0.6rem;letter-spacing:0.18em;color:var(--text-3)}
+@keyframes sb{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(6px)}}
+#contact{background:var(--bg-2);padding:6rem 0}
+.contact-wrap{text-align:center;max-width:540px;margin:0 auto}
+.contact-wrap h2{font-size:clamp(1.8rem,3vw,2.5rem);font-weight:700;letter-spacing:-0.02em;margin-bottom:0.9rem;color:var(--text-1)}
+.contact-wrap h2 em{color:var(--accent-blue);font-style:normal}
+.contact-sub{font-size:0.94rem;color:var(--text-2);line-height:1.7;margin-bottom:2.5rem}
+.contact-icons{display:flex;gap:1.8rem;justify-content:center;margin-bottom:2rem;flex-wrap:wrap}
+.cicon-wrap{display:flex;flex-direction:column;align-items:center;gap:0.4rem;text-decoration:none;position:relative;transition:transform 0.2s}
+.cicon-wrap:hover{transform:translateY(-4px)}
+.cicon{width:62px;height:62px;border:1px solid var(--border);background:var(--bg-card);display:flex;align-items:center;justify-content:center;font-size:1.4rem;border-radius:var(--radius);transition:all 0.25s;box-shadow:0 1px 4px rgba(0,0,0,0.06)}
+.cicon-wrap:hover .cicon{border-color:var(--accent-blue);box-shadow:0 4px 20px rgba(30,80,160,0.18)}
+.cicon-label{font-family:var(--font-m);font-size:0.63rem;color:var(--text-3);letter-spacing:0.1em}
+.cicon-tip{position:absolute;top:-32px;left:50%;transform:translateX(-50%);background:var(--text-1);color:#fff;padding:0.22rem 0.65rem;font-family:var(--font-m);font-size:0.6rem;white-space:nowrap;letter-spacing:0.08em;opacity:0;pointer-events:none;transition:opacity 0.2s;border-radius:4px}
+.cicon-wrap:hover .cicon-tip{opacity:1}
+.loc-badge{display:inline-flex;align-items:center;gap:0.45rem;padding:0.5rem 1.3rem;border:1px solid var(--border);background:var(--bg-card);font-family:var(--font-m);font-size:0.72rem;color:var(--text-2);letter-spacing:0.07em;border-radius:20px;box-shadow:0 1px 4px rgba(0,0,0,0.06)}
+.loc-badge em{color:var(--accent-blue);font-style:normal}
+@media(max-width:768px){.hero-inner{grid-template-columns:1fr;padding:0 1.4rem}.hero-right{display:none}.hero-left{padding-bottom:20vh}}
+@media(max-width:480px){.hero-name{font-size:clamp(2.8rem,12vw,4rem)}.hero-left{padding-bottom:16vh}}
+</style>
+</head>
+<body>
+<nav id="navbar">
+  <a href="index.html" class="nav-logo">AR<span>.</span></a>
+  <ul class="nav-links">
+    <li><a href="index.html" class="active">Home</a></li>
+    <li><a href="about.html">About Me</a></li>
+    <li><a href="portfolio.html">Portfolio</a></li>
+    <li><a href="resume.html">Resume</a></li>
+    <li><a href="mission.html">Mission</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <div class="hamburger" id="hbg"><span></span><span></span><span></span></div>
+</nav>
+<div class="mob-overlay" id="mob-menu">
+  <a href="index.html" onclick="closeMob()">Home</a>
+  <a href="about.html" onclick="closeMob()">About Me</a>
+  <a href="portfolio.html" onclick="closeMob()">Portfolio</a>
+  <a href="resume.html" onclick="closeMob()">Resume</a>
+  <a href="mission.html" onclick="closeMob()">Mission</a>
+  <a href="contact.html" onclick="closeMob()">Contact</a>
+</div>
+
+<section id="home">
+  <div class="hero-bg-grid"></div>
+  <div class="hero-bg-dots"></div>
+  <canvas id="hero-particles"></canvas>
+  <div class="hero-bridge-wrap">
+    <svg id="hero-bridge" viewBox="0 0 1100 320" xmlns="http://www.w3.org/2000/svg" fill="none">
+      <path id="br-ground" d="M0 310 L1100 310" stroke="#1E50A0" stroke-width="1.5" opacity="0.3"/>
+      <path id="br-ramp-l" d="M0 295 L160 255" stroke="#1E50A0" stroke-width="2"/>
+      <path id="br-ramp-r" d="M1100 295 L940 255" stroke="#1E50A0" stroke-width="2"/>
+      <path id="br-deck" d="M160 255 L940 255" stroke="#1E50A0" stroke-width="2.5"/>
+      <path id="br-chord" d="M160 268 L940 268" stroke="#1E50A0" stroke-width="1.2" stroke-dasharray="10,5"/>
+      <path id="br-pyl-l" d="M350 255 L350 60" stroke="#00A3CC" stroke-width="3.5" stroke-linecap="round"/>
+      <path id="br-pyl-r" d="M750 255 L750 60" stroke="#00A3CC" stroke-width="3.5" stroke-linecap="round"/>
+      <path id="br-cap-l" d="M341 58 L359 58" stroke="#00A3CC" stroke-width="3"/>
+      <path id="br-cap-r" d="M741 58 L759 58" stroke="#00A3CC" stroke-width="3"/>
+      <path id="br-px-l1" d="M338 105 L362 105" stroke="#1E50A0" stroke-width="2"/>
+      <path id="br-px-l2" d="M340 145 L360 145" stroke="#1E50A0" stroke-width="2"/>
+      <path id="br-px-l3" d="M342 190 L358 190" stroke="#1E50A0" stroke-width="1.8"/>
+      <path id="br-px-r1" d="M738 105 L762 105" stroke="#1E50A0" stroke-width="2"/>
+      <path id="br-px-r2" d="M740 145 L760 145" stroke="#1E50A0" stroke-width="2"/>
+      <path id="br-px-r3" d="M742 190 L758 190" stroke="#1E50A0" stroke-width="1.8"/>
+      <path id="br-cl1" d="M350 68 L200 255" stroke="#1E50A0" stroke-width="1.1" stroke-dasharray="4,3"/>
+      <path id="br-cl2" d="M350 68 L260 255" stroke="#1E50A0" stroke-width="1.1" stroke-dasharray="4,3"/>
+      <path id="br-cl3" d="M350 68 L320 255" stroke="#1E50A0" stroke-width="1.1" stroke-dasharray="4,3"/>
+      <path id="br-cl4" d="M350 68 L400 255" stroke="#1E50A0" stroke-width="1.1" stroke-dasharray="4,3"/>
+      <path id="br-cl5" d="M350 68 L460 255" stroke="#1E50A0" stroke-width="1.1" stroke-dasharray="4,3"/>
+      <path id="br-cl6" d="M350 68 L520 255" stroke="#1E50A0" stroke-width="1.1" stroke-dasharray="4,3"/>
+      <path id="br-cr1" d="M750 68 L900 255" stroke="#1E50A0" stroke-width="1.1" stroke-dasharray="4,3"/>
+      <path id="br-cr2" d="M750 68 L840 255" stroke="#1E50A0" stroke-width="1.1" stroke-dasharray="4,3"/>
+      <path id="br-cr3" d="M750 68 L780 255" stroke="#1E50A0" stroke-width="1.1" stroke-dasharray="4,3"/>
+      <path id="br-cr4" d="M750 68 L700 255" stroke="#1E50A0" stroke-width="1.1" stroke-dasharray="4,3"/>
+      <path id="br-cr5" d="M750 68 L640 255" stroke="#1E50A0" stroke-width="1.1" stroke-dasharray="4,3"/>
+      <path id="br-cr6" d="M750 68 L580 255" stroke="#1E50A0" stroke-width="1.1" stroke-dasharray="4,3"/>
+      <path id="br-hng" d="M220 255 L220 280 M280 255 L280 280 M340 255 L340 280 M420 255 L420 280 M490 255 L490 280 M550 255 L550 280 M610 255 L610 280 M680 255 L680 280 M760 255 L760 280 M820 255 L820 280 M880 255 L880 280" stroke="#1E50A0" stroke-width="1" opacity="0.5"/>
+      <path id="br-dim" d="M350 300 L750 300" stroke="#1E50A0" stroke-width="0.8" stroke-dasharray="5,4"/>
+      <path id="br-dim-tl" d="M350 294 L350 306" stroke="#1E50A0" stroke-width="0.8"/>
+      <path id="br-dim-tr" d="M750 294 L750 306" stroke="#1E50A0" stroke-width="0.8"/>
+      <text x="550" y="320" font-family="SF Mono,monospace" font-size="10" fill="#1E50A0" text-anchor="middle" opacity="0.6">MAIN SPAN — 400.0m · AS5100</text>
+      <text x="350" y="46" font-family="SF Mono,monospace" font-size="9" fill="#00A3CC" text-anchor="middle" opacity="0.8">P1</text>
+      <text x="750" y="46" font-family="SF Mono,monospace" font-size="9" fill="#00A3CC" text-anchor="middle" opacity="0.8">P2</text>
+    </svg>
+  </div>
+  <div class="hero-inner">
+    <div class="hero-left">
+      <p class="hero-eyebrow">Civil Design Engineer · GradIEAust</p>
+      <h1 class="hero-name">ARIJEET<span>ROY</span></h1>
+      <p class="hero-sub">Civil Design Engineer</p>
+      <p class="hero-grad">GradIEAust · Engineers Australia</p>
+      <div class="hero-rule"></div>
+      <p class="hero-tagline">"Leaving the world a better place than I found it."</p>
+    </div>
+    <div class="hero-right">
+      <a href="https://www.linkedin.com/in/arijeetsdiary/" target="_blank" rel="noopener" class="hero-sidebar-link">LinkedIn</a>
+      <a href="about.html" class="hero-sidebar-link">About Me</a>
+      <a href="portfolio.html" class="hero-sidebar-link">Projects</a>
+      <a href="mission.html" class="hero-sidebar-link">Mission</a>
+    </div>
+  </div>
+  <div class="scroll-ind">
+    <span>SCROLL</span>
+    <svg width="14" height="18" viewBox="0 0 14 18" fill="none"><path d="M7 1v13M1 10l6 6 6-6" stroke="#1E50A0" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="container">
+    <div class="contact-wrap">
+      <div class="reveal">
+        <p class="sec-label" style="justify-content:center">Get In Touch</p>
+        <h2>Let's <em>Connect</em></h2>
+        <p class="contact-sub">Open to civil, structural, transport, and environmental engineering opportunities in Melbourne.</p>
+      </div>
+      <div class="contact-icons reveal">
+        <a href="mailto:work.arijeet@gmail.com" class="cicon-wrap">
+          <div class="cicon">📧</div>
+          <span class="cicon-tip">work.arijeet@gmail.com</span>
+          <span class="cicon-label">Email</span>
+        </a>
+        <a href="https://www.linkedin.com/in/arijeetsdiary/" target="_blank" rel="noopener" class="cicon-wrap">
+          <div class="cicon">💼</div>
+          <span class="cicon-tip">linkedin.com/in/arijeetsdiary</span>
+          <span class="cicon-label">LinkedIn</span>
+        </a>
+        <a href="https://www.youtube.com/@arijeetroy" target="_blank" rel="noopener" class="cicon-wrap">
+          <div class="cicon">▶️</div>
+          <span class="cicon-tip">youtube.com/@arijeetroy</span>
+          <span class="cicon-label">YouTube</span>
+        </a>
+      </div>
+      <div class="reveal">
+        <div class="loc-badge">📍 &nbsp;Melbourne, VIC &nbsp;·&nbsp; <em>Open to opportunities</em></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="foot-icons">
+    <a href="mailto:work.arijeet@gmail.com" title="Email">📧</a>
+    <a href="https://www.linkedin.com/in/arijeetsdiary/" target="_blank" rel="noopener" title="LinkedIn">💼</a>
+    <a href="https://www.youtube.com/@arijeetroy" target="_blank" rel="noopener" title="YouTube">▶️</a>
+  </div>
+  <p class="foot-copy">© 2026 Arijeet Roy · Civil Design Engineer · GradIEAust · Melbourne</p>
+  <p class="foot-tag">"Leaving the world a better place than I found it."</p>
+</footer>
+
+<script>
+const nav=document.getElementById('navbar');
+window.addEventListener('scroll',()=>{nav.classList.toggle('scrolled',window.scrollY>60);});
+const hbg=document.getElementById('hbg'),mob=document.getElementById('mob-menu');
+hbg.addEventListener('click',()=>{hbg.classList.toggle('open');mob.classList.toggle('open');});
+function closeMob(){hbg.classList.remove('open');mob.classList.remove('open');}
+(function(){
+  const cvs=document.getElementById('hero-particles'),c=cvs.getContext('2d');
+  function resize(){cvs.width=window.innerWidth;cvs.height=window.innerHeight;}
+  resize();window.addEventListener('resize',resize);
+  const pts=[];
+  for(let i=0;i<60;i++)pts.push({x:Math.random()*window.innerWidth,y:Math.random()*window.innerHeight,r:Math.random()*1.2+0.3,vx:(Math.random()-.5)*.25,vy:(Math.random()-.5)*.25,a:Math.random()*.25+0.04,p:Math.random()*Math.PI*2});
+  function loop(){
+    c.clearRect(0,0,cvs.width,cvs.height);
+    pts.forEach(p=>{p.x+=p.vx;p.y+=p.vy;p.p+=0.016;
+      if(p.x<0)p.x=cvs.width;if(p.x>cvs.width)p.x=0;
+      if(p.y<0)p.y=cvs.height;if(p.y>cvs.height)p.y=0;
+      const a=p.a*(0.7+0.3*Math.sin(p.p));
+      c.beginPath();c.arc(p.x,p.y,p.r,0,Math.PI*2);c.fillStyle=`rgba(30,80,160,${a})`;c.fill();
+    });
+    for(let i=0;i<pts.length;i++)for(let j=i+1;j<pts.length;j++){
+      const dx=pts[i].x-pts[j].x,dy=pts[i].y-pts[j].y,d=Math.sqrt(dx*dx+dy*dy);
+      if(d<110){c.beginPath();c.moveTo(pts[i].x,pts[i].y);c.lineTo(pts[j].x,pts[j].y);c.strokeStyle=`rgba(30,80,160,${0.05*(1-d/110)})`;c.lineWidth=0.5;c.stroke();}
+    }
+    requestAnimationFrame(loop);
+  }
+  loop();
+})();
+window.addEventListener('load',()=>{
+  anime.timeline({easing:'easeOutExpo'})
+    .add({targets:'.hero-eyebrow',opacity:[0,1],translateY:[14,0],duration:700},250)
+    .add({targets:'.hero-name',opacity:[0,1],translateY:[32,0],duration:850},430)
+    .add({targets:'.hero-sub',opacity:[0,1],translateY:[12,0],duration:600},780)
+    .add({targets:'.hero-grad',opacity:[0,1],translateY:[10,0],duration:500},950)
+    .add({targets:'.hero-rule',opacity:[0,1],scaleX:[0,1],duration:500},1080)
+    .add({targets:'.hero-tagline',opacity:[0,1],translateY:[10,0],duration:600},1200)
+    .add({targets:'.scroll-ind',opacity:[0,1],duration:400},1850);
+  anime({targets:'.hero-sidebar-link',opacity:[0,1],translateX:[10,0],delay:anime.stagger(150,{start:850}),duration:600,easing:'easeOutExpo'});
+  startBridge();
+});
+const bridgeSeq=['br-ground','br-ramp-l','br-ramp-r','br-deck','br-chord','br-pyl-l','br-pyl-r','br-cap-l','br-cap-r','br-px-l1','br-px-l2','br-px-l3','br-px-r1','br-px-r2','br-px-r3','br-cl1','br-cl2','br-cl3','br-cl4','br-cl5','br-cl6','br-cr1','br-cr2','br-cr3','br-cr4','br-cr5','br-cr6','br-hng','br-dim','br-dim-tl','br-dim-tr'];
+function initBridge(){bridgeSeq.forEach(id=>{const el=document.getElementById(id);if(!el)return;try{const L=el.getTotalLength();el.style.strokeDasharray=L;el.style.strokeDashoffset=L;}catch(e){el.style.strokeDasharray=200;el.style.strokeDashoffset=200;}});}
+function startBridge(){
+  initBridge();
+  const delays=[0,200,200,500,550,700,700,1050,1050,1200,1300,1400,1200,1300,1400,1700,1800,1900,2000,2100,2200,1700,1800,1900,2000,2100,2200,2500,2700,2700,2700];
+  const tl=anime.timeline({easing:'easeInOutSine',complete:()=>setTimeout(()=>{anime({targets:'#hero-bridge',opacity:[0.55,0],duration:700,easing:'easeInSine',complete:()=>{initBridge();anime({targets:'#hero-bridge',opacity:[0,0.55],duration:400,easing:'easeOutSine',complete:startBridge});}});},3000)});
+  bridgeSeq.forEach((id,i)=>{const el=document.getElementById(id);if(!el)return;tl.add({targets:el,strokeDashoffset:[anime.setDashoffset,0],duration:550+Math.random()*200},delays[i]||i*90);});
+}
+const revObs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');revObs.unobserve(e.target);}});},{threshold:0.1});
+setTimeout(()=>{document.querySelectorAll('.reveal').forEach((el,i)=>{el.style.transitionDelay=(i*120)+'ms';revObs.observe(el);});},80);
+</script>
+</body>
+</html>

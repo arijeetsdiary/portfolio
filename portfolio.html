@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portfolio — Arijeet Roy</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+/* ===== SHARED CSS — Light & Precision palette ===== */
+:root{
+  --bg-1:#F7F8FA;
+  --bg-2:#EAECF0;
+  --bg-3:#F0F2F5;
+  --bg-card:#FFFFFF;
+  --accent-blue:#1E50A0;
+  --accent-teal:#00A3CC;
+  --accent-teal-dim:rgba(0,163,204,0.10);
+  --accent-blue-dim:rgba(30,80,160,0.08);
+  --text-1:#0F1923;
+  --text-2:#3D4F63;
+  --text-3:#6B7A8D;
+  --border:rgba(30,80,160,0.13);
+  --border-bright:rgba(0,163,204,0.45);
+  --radius:8px;
+  --font:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+  --font-m:'SF Mono','Fira Code','JetBrains Mono',monospace;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg-1);color:var(--text-1);font-family:var(--font);font-size:16px;line-height:1.65;overflow-x:hidden}
+::-webkit-scrollbar{width:5px}::-webkit-scrollbar-track{background:var(--bg-1)}::-webkit-scrollbar-thumb{background:var(--accent-blue);border-radius:3px}
+::selection{background:rgba(30,80,160,0.15);color:var(--text-1)}
+nav{position:fixed;top:0;left:0;right:0;z-index:999;padding:1.2rem 3.5rem;display:flex;align-items:center;justify-content:space-between;transition:all 0.35s ease;background:transparent}
+nav.scrolled{background:rgba(247,248,250,0.94);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--border);padding:0.85rem 3.5rem}
+.nav-logo{font-family:var(--font);font-size:1.3rem;font-weight:700;color:var(--text-1);text-decoration:none;letter-spacing:-0.01em}
+.nav-logo span{color:var(--accent-blue)}
+.nav-links{list-style:none;display:flex;gap:2.2rem}
+.nav-links a{color:var(--text-2);text-decoration:none;font-family:var(--font-m);font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;transition:color 0.2s;position:relative}
+.nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:1.5px;background:var(--accent-blue);transition:width 0.3s ease}
+.nav-links a:hover,.nav-links a.active{color:var(--accent-blue)}
+.nav-links a:hover::after,.nav-links a.active::after{width:100%}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:3px}
+.hamburger span{width:22px;height:1.5px;background:var(--text-1);transition:all 0.3s ease;display:block}
+.hamburger.open span:nth-child(1){transform:rotate(45deg) translate(4.5px,4.5px)}
+.hamburger.open span:nth-child(2){opacity:0}
+.hamburger.open span:nth-child(3){transform:rotate(-45deg) translate(4.5px,-4.5px)}
+.mob-overlay{display:none;position:fixed;inset:0;background:rgba(247,248,250,0.98);z-index:998;flex-direction:column;align-items:center;justify-content:center;gap:2rem}
+.mob-overlay.open{display:flex}
+.mob-overlay a{font-size:2rem;font-weight:700;color:var(--text-2);text-decoration:none;letter-spacing:-0.01em;transition:color 0.2s}
+.mob-overlay a:hover{color:var(--accent-blue)}
+.page-hero{padding:9rem 0 4.5rem;background:var(--bg-1);position:relative;overflow:hidden}
+.page-hero::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(30,80,160,0.05) 1px,transparent 1px),linear-gradient(90deg,rgba(30,80,160,0.05) 1px,transparent 1px);background-size:56px 56px}
+.page-hero-inner{position:relative;z-index:2;max-width:1200px;margin:0 auto;padding:0 3.5rem}
+.page-eyebrow{font-family:var(--font-m);font-size:0.7rem;letter-spacing:0.22em;color:var(--accent-blue);text-transform:uppercase;margin-bottom:0.9rem}
+.page-title{font-size:clamp(2.6rem,5.5vw,4.5rem);font-weight:700;letter-spacing:-0.02em;line-height:1.05;color:var(--text-1);margin-bottom:0.9rem}
+.page-title em{color:var(--accent-blue);font-style:normal}
+.page-rule{width:44px;height:2px;background:linear-gradient(90deg,var(--accent-blue),var(--accent-teal));margin-bottom:1rem}
+.page-subtitle{font-size:1rem;color:var(--text-2);font-weight:400}
+section{padding:6rem 0}
+.container{max-width:1200px;margin:0 auto;padding:0 3.5rem}
+.sec-label{font-family:var(--font-m);font-size:0.68rem;letter-spacing:0.22em;color:var(--accent-blue);text-transform:uppercase;display:flex;align-items:center;gap:0.7rem;margin-bottom:0.7rem}
+.sec-label::before{content:'';width:24px;height:1.5px;background:var(--accent-blue)}
+.sec-title{font-size:clamp(1.8rem,3vw,2.6rem);font-weight:700;color:var(--text-1);letter-spacing:-0.02em;line-height:1.1;margin-bottom:2.5rem}
+.sec-title em{color:var(--accent-blue);font-style:normal}
+.reveal{opacity:0;transform:translateY(28px);transition:opacity 0.7s ease,transform 0.7s ease}
+.reveal.in{opacity:1;transform:none}
+.reveal-left{opacity:0;transform:translateX(-32px);transition:opacity 0.7s ease,transform 0.7s ease}
+.reveal-left.in{opacity:1;transform:none}
+.reveal-right{opacity:0;transform:translateX(32px);transition:opacity 0.7s ease,transform 0.7s ease}
+.reveal-right.in{opacity:1;transform:none}
+footer{background:var(--text-1);padding:2.5rem 2rem;text-align:center;border-top:1px solid rgba(255,255,255,0.08)}
+.foot-icons{display:flex;gap:1rem;justify-content:center;margin-bottom:1.2rem}
+.foot-icons a{width:36px;height:36px;border:1px solid rgba(255,255,255,0.15);display:flex;align-items:center;justify-content:center;border-radius:var(--radius);font-size:0.9rem;text-decoration:none;transition:all 0.22s}
+.foot-icons a:hover{border-color:var(--accent-teal);background:rgba(0,163,204,0.15)}
+.foot-copy{font-family:var(--font-m);font-size:0.68rem;color:rgba(255,255,255,0.4);letter-spacing:0.08em;margin-bottom:0.35rem}
+.foot-tag{font-size:0.82rem;color:rgba(255,255,255,0.3);font-style:italic}
+@media(max-width:768px){nav{padding:1rem 1.4rem}nav.scrolled{padding:0.7rem 1.4rem}.nav-links{display:none}.hamburger{display:flex}.container{padding:0 1.4rem}section{padding:4rem 0}.page-hero-inner{padding:0 1.4rem}}
+.portfolio-sub{font-size:0.96rem;color:var(--text-2);font-style:italic;margin-top:-1.5rem;margin-bottom:3rem}
+.cards-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.6rem}
+.pcard{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;transition:transform 0.3s,border-color 0.3s,box-shadow 0.3s;position:relative;box-shadow:0 1px 4px rgba(0,0,0,0.05)}
+.pcard:hover{transform:translateY(-5px);border-color:var(--accent-blue);box-shadow:0 12px 40px rgba(30,80,160,0.14)}
+.pcard::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--accent-blue),var(--accent-teal))}
+.pcard-img{width:100%;height:185px;object-fit:cover;display:block;border-bottom:1px solid var(--border);filter:grayscale(15%) brightness(0.95);transition:filter 0.4s ease}
+.pcard:hover .pcard-img{filter:grayscale(0%) brightness(1)}
+.pcard-img-placeholder{width:100%;height:185px;display:flex;align-items:center;justify-content:center;background:var(--bg-2);border-bottom:1px solid var(--border);font-family:var(--font-m);font-size:0.62rem;color:var(--text-3);letter-spacing:0.1em;text-transform:uppercase;flex-direction:column;gap:0.5rem}
+.pcard-head{padding:1.3rem 1.4rem 0.9rem;border-bottom:1px solid var(--border)}
+.pcard-meta{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:0.4rem;margin-bottom:0.55rem}
+.pcard-badge{font-family:var(--font-m);font-size:0.6rem;letter-spacing:0.09em;color:var(--accent-blue);background:var(--accent-blue-dim);border:1px solid rgba(30,80,160,0.2);padding:0.18rem 0.55rem;border-radius:3px}
+.pcard-date{font-family:var(--font-m);font-size:0.6rem;color:var(--text-3)}
+.pcard-title{font-size:1.05rem;font-weight:700;color:var(--text-1);letter-spacing:-0.01em;line-height:1.3}
+.pcard-body{padding:0.9rem 1.4rem}
+.pcard-body ul{list-style:none}
+.pcard-body ul li{font-size:0.83rem;color:var(--text-2);padding:0.25rem 0 0.25rem 1rem;position:relative;line-height:1.55}
+.pcard-body ul li::before{content:'›';position:absolute;left:0;color:var(--accent-teal);font-weight:700}
+.pcard-tags{padding:0 1.4rem 1.4rem;display:flex;flex-wrap:wrap;gap:0.35rem}
+.tag{font-family:var(--font-m);font-size:0.6rem;letter-spacing:0.06em;color:var(--accent-blue);border:1px solid rgba(30,80,160,0.2);background:var(--accent-blue-dim);padding:0.18rem 0.48rem;border-radius:3px}
+.reveal-top{opacity:0;transform:translateY(-24px);transition:opacity 0.7s ease,transform 0.7s ease}
+.reveal-top.in{opacity:1;transform:none}
+@media(max-width:768px){.cards-grid{grid-template-columns:1fr}.container{padding:0 1.4rem}section{padding:4rem 0}.page-hero-inner{padding:0 1.4rem}}
+</style>
+</head>
+<body>
+<nav id="navbar">
+  <a href="index.html" class="nav-logo">AR<span>.</span></a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="about.html">About Me</a></li>
+    <li><a href="portfolio.html" class="active">Portfolio</a></li>
+    <li><a href="resume.html">Resume</a></li>
+    <li><a href="mission.html">Mission</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <div class="hamburger" id="hbg"><span></span><span></span><span></span></div>
+</nav>
+<div class="mob-overlay" id="mob-menu">
+  <a href="index.html" onclick="closeMob()">Home</a>
+  <a href="about.html" onclick="closeMob()">About Me</a>
+  <a href="portfolio.html" onclick="closeMob()">Portfolio</a>
+  <a href="resume.html" onclick="closeMob()">Resume</a>
+  <a href="mission.html" onclick="closeMob()">Mission</a>
+  <a href="contact.html" onclick="closeMob()">Contact</a>
+</div>
+<div class="page-hero">
+  <div class="page-hero-inner">
+    <p class="page-eyebrow">Engineering Work</p>
+    <h1 class="page-title">Selected <em>Portfolio</em></h1>
+    <div class="page-rule"></div>
+    <p class="page-subtitle">"Projects that shaped how I think as an engineer."</p>
+  </div>
+</div>
+<section style="background:var(--bg-1)">
+  <div class="container">
+    <div class="cards-grid">
+
+      <div class="pcard reveal-top">
+        <img class="pcard-img" src="assets/images/cement-lab.jpg" alt="Low-carbon cement laboratory" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="pcard-img-placeholder" style="display:none">📷 Upload: assets/images/cement-lab.jpg</div>
+        <div class="pcard-head">
+          <div class="pcard-meta"><span class="pcard-badge">Macquarie University · Honours Thesis</span><span class="pcard-date">Feb 2023 – Dec 2023</span></div>
+          <h3 class="pcard-title">Efficient Low-Carbon Cementitious Systems</h3>
+        </div>
+        <div class="pcard-body"><ul>
+          <li>Designed and tested 150+ concrete mix variations to reduce embodied carbon while holding structural performance steady</li>
+          <li>Cut research turnaround time by 40% through a streamlined testing protocol</li>
+          <li>Nominated for Greatest Commercial Development Potential — one of the university's top honours engineering awards</li>
+          <li>Applied materials science and concrete technology principles relevant to sustainable infrastructure specification</li>
+        </ul></div>
+        <div class="pcard-tags"><span class="tag">AS 3600</span><span class="tag">Concrete Technology</span><span class="tag">Sustainable Design</span><span class="tag">Mix Design</span><span class="tag">Laboratory Testing</span><span class="tag">Data Analysis</span></div>
+      </div>
+
+      <div class="pcard reveal-top">
+        <img class="pcard-img" src="assets/images/telecom-tower.jpg" alt="Telecommunications tower" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="pcard-img-placeholder" style="display:none">📷 Upload: assets/images/telecom-tower.jpg</div>
+        <div class="pcard-head">
+          <div class="pcard-meta"><span class="pcard-badge">DDC Australia · Civil Design Engineer</span><span class="pcard-date">Aug 2023 – Aug 2024</span></div>
+          <h3 class="pcard-title">Telecommunications Infrastructure — Structural Design</h3>
+        </div>
+        <div class="pcard-body"><ul>
+          <li>Delivered DFC and FC structural assessments across 15+ site upgrades from 4G to 5G — Telstra, Optus and Vodafone in NSW, VIC and QLD</li>
+          <li>Modelled structural framing, antenna mounts, RF dishes and 5G equipment in AutoCAD and Civil 3D</li>
+          <li>Verified structural capacity against AS4100, AS3600 and AS5100 through on-site measurements</li>
+          <li>Identified recurring datum error, built validation checklist, and cut design turnaround by 20%</li>
+        </ul></div>
+        <div class="pcard-tags"><span class="tag">AutoCAD</span><span class="tag">Civil 3D</span><span class="tag">AS 4100</span><span class="tag">AS 3995</span><span class="tag">Structural Assessment</span><span class="tag">SAED</span></div>
+      </div>
+
+      <div class="pcard reveal-top">
+        <img class="pcard-img" src="assets/images/bridge.jpg" alt="Bridge upgrade project" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="pcard-img-placeholder" style="display:none">📷 Upload: assets/images/bridge.jpg</div>
+        <div class="pcard-head">
+          <div class="pcard-meta"><span class="pcard-badge">Macquarie University · Industry Project</span><span class="pcard-date">Feb 2023 – Jun 2023</span></div>
+          <h3 class="pcard-title">Bridge Upgrade — Transport for NSW / City of Ryde</h3>
+        </div>
+        <div class="pcard-body"><ul>
+          <li>Conducted structural analysis of 4 bridge design alternatives in compliance with AS5100, AS4100 and AS4600, evaluating feasibility against TfNSW requirements</li>
+          <li>Led selection of final bridge design option based on structural performance, compliance, and site suitability</li>
+          <li>Built detailed CAD models for the selected design and produced comprehensive structural assessment report</li>
+          <li>Conducted geotechnical analysis of existing foundations, site conditions, and retaining walls</li>
+        </ul></div>
+        <div class="pcard-tags"><span class="tag">AS5100</span><span class="tag">AS4100</span><span class="tag">AS4600</span><span class="tag">Revit</span><span class="tag">Infraworks</span><span class="tag">SPACE GASS</span><span class="tag">Bridge Design</span></div>
+      </div>
+
+      <div class="pcard reveal-top">
+        <img class="pcard-img" src="assets/images/mtgilead.jpg" alt="Mt Gilead Estate construction project" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="pcard-img-placeholder" style="display:none">📷 Upload: assets/images/mtgilead.jpg</div>
+        <div class="pcard-head">
+          <div class="pcard-meta"><span class="pcard-badge">Macquarie University · CIVL3401</span><span class="pcard-date">2023</span></div>
+          <h3 class="pcard-title">Project Manager — Mt Gilead Estate, Campbelltown NSW</h3>
+        </div>
+        <div class="pcard-body"><ul>
+          <li>Spearheaded preparation of project documentation including scope, schedules and risk assessments, ensuring full compliance with safety and regulatory standards</li>
+          <li>Crafted and submitted detailed project proposals and tender bids with accurate budgeting and timelines</li>
+          <li>Engineered traffic management plans and conducted environmental assessments, proactively mitigating construction risks</li>
+          <li>Optimised road design for safer delivery across a live residential estate development</li>
+        </ul></div>
+        <div class="pcard-tags"><span class="tag">Construction Management</span><span class="tag">Project Documentation</span><span class="tag">Tender Bids</span><span class="tag">Traffic Management</span><span class="tag">Environmental Assessment</span></div>
+      </div>
+
+      <div class="pcard reveal-top">
+        <img class="pcard-img" src="assets/images/robot.jpg" alt="Ball collecting autonomous robot" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="pcard-img-placeholder" style="display:none">📷 Upload: assets/images/robot.jpg</div>
+        <div class="pcard-head">
+          <div class="pcard-meta"><span class="pcard-badge">Macquarie University · ENGG 3000</span><span class="pcard-date">Jul 2021 – Dec 2021</span></div>
+          <h3 class="pcard-title">Ball Collecting Robot — Autonomous Collection &amp; Disposal System</h3>
+        </div>
+        <div class="pcard-body"><ul>
+          <li>Decomposed a complex engineering system into functional subsystems across a multidisciplinary team, coordinating between mechanical, electrical and software disciplines</li>
+          <li>Designed the robot's body structure, internal compartments for ball collection, and the collection and disposal mechanism</li>
+          <li>Applied creative problem-solving and structural thinking to meet system constraints and deliver an integrated solution</li>
+        </ul></div>
+        <div class="pcard-tags"><span class="tag">Structural Design</span><span class="tag">Systems Engineering</span><span class="tag">Traceability Documentation</span><span class="tag">Prototype Development</span></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+<footer>
+  <div class="foot-icons">
+    <a href="mailto:work.arijeet@gmail.com" title="Email">📧</a>
+    <a href="https://www.linkedin.com/in/arijeetsdiary/" target="_blank" rel="noopener" title="LinkedIn">💼</a>
+    <a href="https://www.youtube.com/@arijeetroy" target="_blank" rel="noopener" title="YouTube">▶️</a>
+  </div>
+  <p class="foot-copy">© 2026 Arijeet Roy · Civil Design Engineer · GradIEAust · Melbourne</p>
+  <p class="foot-tag">"Leaving the world a better place than I found it."</p>
+</footer>
+<script>
+const nav=document.getElementById('navbar');
+window.addEventListener('scroll',()=>{nav.classList.toggle('scrolled',window.scrollY>60);});
+const hbg=document.getElementById('hbg'),mob=document.getElementById('mob-menu');
+hbg.addEventListener('click',()=>{hbg.classList.toggle('open');mob.classList.toggle('open');});
+function closeMob(){hbg.classList.remove('open');mob.classList.remove('open');}
+const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');obs.unobserve(e.target);}});},{threshold:0.1});
+setTimeout(()=>{document.querySelectorAll('.reveal-top').forEach((el,i)=>{el.style.transitionDelay=(i*100)+'ms';obs.observe(el);});},80);
+</script>
+</body>
+</html>
