@@ -89,6 +89,18 @@ const SITE_DATA = {
   // ----------------------------------------------------------------
   experience: [
     {
+      title: "Graduate Water Infrastructure Engineer",
+      org: "Test Civil",
+      period: "Oct 2026 – Present",
+      location: "Perth, WA",
+      bullets: [
+        "Delivered hydraulic modelling, options assessments, and detailed design for water and wastewater infrastructure projects across South East Queensland (supporting clients like Seqwater, Unitywater, and Brisbane City Council)."
+        "Modelled pipe networks, pump stations, and stormwater systems using InfoWorks ICM, EPANET, AutoCAD, and Civil 3D, producing construction-ready drawings and technical reports."
+        "Ensured full compliance with industry codes and standards, verifying network capacities and design parameters against WSAA codes, SEQ Water Supply and Sewerage Design-Constraining Standards, and relevant Australian Standards."
+        "Streamlined multidisciplinary coordination and design reviews by developing automated Excel calculation templates, reducing design checking turnaround time by 15%."
+      ]
+    },
+    {
       title: "Civil Design Engineer",
       org: "Design Development Consultant Australia (DDCA)",
       period: "Aug 2023 – Aug 2024",
