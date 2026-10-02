@@ -89,6 +89,18 @@ const SITE_DATA = {
   // ----------------------------------------------------------------
   experience: [
     {
+      title: "Graduate Water Infrastructure Engineer",
+      org: "SMEC",
+      period: "Oct 2026 – Present",
+      location: "Brisbane, QLD",
+      bullets: [
+        "Performed hydraulic modelling and capacity assessments for municipal water and wastewater networks across 10+ urban development packages using InfoWorks and EPANET"
+        "Designed civil layouts, stormwater management systems, and pipeline alignments in Civil 3D, adhering to WSAA codes and local water authority standards"
+        "Conducted asset condition inspections and verified infrastructure compliance against AS/NZS standards and regional design specifications"
+        "Streamlined design reporting workflows by automating calculation templates, reducing cross-discipline review turnaround time by 15%"
+      ]
+    },
+    {
       title: "Civil Design Engineer",
       org: "Design Development Consultant Australia (DDCA)",
       period: "Aug 2023 – Aug 2024",
